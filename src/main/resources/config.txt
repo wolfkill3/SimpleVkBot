@@ -1,0 +1,3 @@
+access_token="211af4c7a56c982e4759bdea8fbf08eaec23c673e3a6e0b0d19c51e0c08e8b9f4983960a43deb32076654"
+extra_text="Вы написали: "
+api_version="5.101"
