@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize
 public class VkMessageRequest {
     public Message object;
-    public String type;
+    public VkRequestType type;
     @JsonProperty("group_id")
     public Integer groupId;
     @JsonProperty("event_id")

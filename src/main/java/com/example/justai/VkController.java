@@ -16,12 +16,17 @@ public class VkController {
     @PostMapping
     public @ResponseBody
     String getNewMessage(@RequestBody VkMessageRequest request) throws IOException {
-        if (request.type.equals("message_new")) {
-            vkApi.sendMessage(request);
-            return "OK";
-        } else if ("confirmation".equals(request.type)) {
-            return vkApi.apiConfig.getValidationToken();
+        switch (request.type) {
+            case MESSAGE_NEW -> {
+                vkApi.sendMessage(request);
+                return "OK";
+            }
+            case CONFIRMATION -> {
+                return vkApi.apiConfig.getValidationToken();
+            }
+            default -> {
+                return "OK";
+            }
         }
-        return "OK";
     }
 }
