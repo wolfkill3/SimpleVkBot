@@ -13,8 +13,8 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 
 public final class VkApi {
     private static final String URI = "https://api.vk.com/method/messages.send";
-    private final ApiConfig apiConfig = ApiConfig.getInstance();
     private final CloseableHttpClient client;
+    public final ApiConfig apiConfig = ApiConfig.getInstance();
 
     public VkApi() {
         CookieStore cookieStore = new BasicCookieStore();

@@ -9,6 +9,7 @@ public final class ApiConfig {
     private String accessToken;
     private String extraText;
     private String apiVersion;
+    private String validationToken;
     private Integer serverPort;
 
     private ApiConfig() {
@@ -38,6 +39,7 @@ public final class ApiConfig {
             case "access_token" -> accessToken = propertyValue;
             case "extra_text" -> extraText = propertyValue;
             case "api_version" -> apiVersion = propertyValue;
+            case "validation_token" -> validationToken = propertyValue;
             case "server_port" -> {
                 try {
                     serverPort = Integer.parseInt(propertyValue);
@@ -69,5 +71,9 @@ public final class ApiConfig {
 
     public Integer getServerPort() {
         return serverPort;
+    }
+
+    public String getValidationToken() {
+        return validationToken;
     }
 }
