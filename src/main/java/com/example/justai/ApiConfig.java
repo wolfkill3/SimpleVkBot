@@ -9,6 +9,7 @@ public final class ApiConfig {
     private String accessToken;
     private String extraText;
     private String apiVersion;
+    private Integer serverPort;
 
     private ApiConfig() {
         parseConfigurationFile();
@@ -20,7 +21,7 @@ public final class ApiConfig {
                 String line = reader.readLine();
                 String propertyValue = line.replaceAll(line.substring(0, line.indexOf('"') + 1), "");
                 propertyValue = propertyValue.replaceAll(propertyValue.substring(propertyValue.indexOf('"')), "");
-                populateProperties(line, propertyValue);
+                populateProperties(line.replaceAll(line.substring(line.indexOf("=")), ""), propertyValue);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -28,19 +29,22 @@ public final class ApiConfig {
         }
     }
 
-    private void populateProperties(final String line, final String propertyValue) {
+    private void populateProperties(final String property, final String propertyValue) {
         if ("".equals(propertyValue)) {
             throw new RuntimeException("Bad config");
         }
 
-        if (line.contains("access_token")) {
-            accessToken = propertyValue;
-        }
-        if (line.contains("extra_text")) {
-            extraText = propertyValue;
-        }
-        if (line.contains("api_version")) {
-            apiVersion = propertyValue;
+        switch (property) {
+            case "access_token" -> accessToken = propertyValue;
+            case "extra_text" -> extraText = propertyValue;
+            case "api_version" -> apiVersion = propertyValue;
+            case "server_port" -> {
+                try {
+                    serverPort = Integer.parseInt(propertyValue);
+                } catch (Exception e) {
+                    serverPort = 8088;
+                }
+            }
         }
     }
 
@@ -61,5 +65,9 @@ public final class ApiConfig {
 
     public String getApiVersion() {
         return apiVersion;
+    }
+
+    public Integer getServerPort() {
+        return serverPort;
     }
 }
