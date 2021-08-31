@@ -4,17 +4,22 @@ import java.io.*;
 
 public final class ApiConfig {
     private static final String FILE_NAME = "config.txt";
-    private static final String FILE_PATH = "src/main/resources/";
+    private static final String FILE_PATH = ""; // заполнить путь до директории
     private static ApiConfig apiConfig;
     private String accessToken;
     private String extraText;
     private String apiVersion;
 
     private ApiConfig() {
+        parseConfigurationFile();
+    }
+
+    private void parseConfigurationFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH + FILE_NAME))) {
             while (reader.ready()) {
                 String line = reader.readLine();
-                String propertyValue = line.replaceAll(line.substring(0, line.indexOf('"')), "").replaceAll("\"", "");
+                String propertyValue = line.replaceAll(line.substring(0, line.indexOf('"') + 1), "");
+                propertyValue = propertyValue.replaceAll(propertyValue.substring(propertyValue.indexOf('"')), "");
                 populateProperties(line, propertyValue);
             }
         } catch (IOException e) {
