@@ -2,7 +2,7 @@ package com.example.justai;
 
 import java.util.*;
 
-public class VkMessageResponse {
+public class VkMessageResponseEntity {
     public String accessToken;
     public Integer groupId;
     public Integer userId;
@@ -10,10 +10,10 @@ public class VkMessageResponse {
     public Integer randomId;
     public String message;
 
-    public VkMessageResponse(VkMessageRequest request,
-                             String accessToken,
-                             String version,
-                             String message) {
+    public VkMessageResponseEntity(VkMessageRequest request,
+                                   String accessToken,
+                                   String version,
+                                   String message) {
         this.accessToken = accessToken;
         this.version = version;
         this.message = message;
@@ -23,8 +23,7 @@ public class VkMessageResponse {
         userId = request.object.peerId;
     }
 
-    @Override
-    public String toString() {
+    public String getEntity() {
         return "access_token=" + accessToken
                + "&group_id=" + groupId
                + "&user_id=" + userId

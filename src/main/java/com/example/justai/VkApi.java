@@ -40,8 +40,8 @@ public final class VkApi {
         HttpPost httpPost = new HttpPost(URI);
         httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
         String message = apiConfig.getExtraText() + request.object.text;
-        VkMessageResponse response = new VkMessageResponse(request, apiConfig.getAccessToken(), apiConfig.getApiVersion(), message);
-        httpPost.setEntity(new StringEntity(response.toString(), "UTF-8"));
+        VkMessageResponseEntity responseEntity = new VkMessageResponseEntity(request, apiConfig.getAccessToken(), apiConfig.getApiVersion(), message);
+        httpPost.setEntity(new StringEntity(responseEntity.getEntity(), "UTF-8"));
         client.execute(httpPost);
     }
 }
